@@ -1,0 +1,69 @@
+-c
+-pipe
+-I"."
+-I"/Users/tin/Projects/unreal5/LicenseSpring/Plugins/LicenseSpringPlugin/Source/LicenseSpringPlugin/Private"
+-I"/Users/tin/Projects/unreal5/LicenseSpring/Plugins/LicenseSpringPlugin/Source"
+-I"/Users/tin/Projects/unreal5/LicenseSpring/Plugins/LicenseSpringPlugin/Source/LicenseSpringPlugin/Public"
+-I"Runtime"
+-I"Runtime/TraceLog/Public"
+-I"Runtime/Core/Public"
+-I"/Users/tin/Projects/unreal5/LicenseSpring/Plugins/LicenseSpringPlugin/Source/ThirdParty"
+-I"Runtime/Projects/Public"
+-I"Runtime/Json/Public"
+-isystem"ThirdParty/mimalloc/include"
+-include-pch "/Users/tin/Projects/unreal5/LicenseSpring/Intermediate/Build/Mac/x86_64/LicenseSpringEditor/Development/Core/SharedPCH.Core.ShadowErrors.h.gch"
+-include "/Users/tin/Projects/unreal5/LicenseSpring/Plugins/LicenseSpringPlugin/Intermediate/Build/Mac/x86_64/UnrealEditor/Development/LicenseSpringPlugin/Definitions.LicenseSpringPlugin.h"
+-Wall
+-Werror
+-Wdelete-non-virtual-dtor
+-Wenum-conversion
+-Wbitfield-enum-conversion
+-Wno-enum-enum-conversion
+-Wno-enum-float-conversion
+-Wno-unused-but-set-variable
+-Wno-unused-but-set-parameter
+-Wno-ordered-compare-function-pointers
+-Wno-bitwise-instead-of-logical
+-Wno-gnu-string-literal-operator-template
+-Wno-inconsistent-missing-override
+-Wno-invalid-offsetof
+-Wno-switch
+-Wno-tautological-compare
+-Wno-unknown-pragmas
+-Wno-unused-function
+-Wno-unused-lambda-capture
+-Wno-unused-local-typedef
+-Wno-unused-private-field
+-Wno-unused-variable
+-Wno-undefined-var-template
+-Wshadow
+-Wundef
+-Wno-float-conversion
+-Wno-implicit-float-conversion
+-Wno-implicit-int-conversion
+-Wno-c++11-narrowing
+-fdiagnostics-absolute-paths
+-fdiagnostics-color
+-Wno-range-loop-analysis
+-O3
+-fexceptions
+-DPLATFORM_EXCEPTIONS_DISABLED=0
+-gdwarf-2
+-fexceptions
+-DPLATFORM_EXCEPTIONS_DISABLED=0
+-fvisibility-ms-compat
+-fvisibility-inlines-hidden
+-fno-rtti
+-fmessage-length=0
+-fpascal-strings
+-fasm-blocks
+-arch x86_64
+-isysroot "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk"
+-mmacosx-version-min=10.15
+-x objective-c++
+-std=c++17
+-fpch-validate-input-files-content
+-stdlib=libc++
+"/Users/tin/Projects/unreal5/LicenseSpring/Plugins/LicenseSpringPlugin/Source/LicenseSpringPlugin/Private/LicenseSpringPlugin.cpp"
+-MD -MF"/Users/tin/Projects/unreal5/LicenseSpring/Plugins/LicenseSpringPlugin/Intermediate/Build/Mac/x86_64/UnrealEditor/Development/LicenseSpringPlugin/LicenseSpringPlugin.cpp.d"
+-o "/Users/tin/Projects/unreal5/LicenseSpring/Plugins/LicenseSpringPlugin/Intermediate/Build/Mac/x86_64/UnrealEditor/Development/LicenseSpringPlugin/LicenseSpringPlugin.cpp.o"

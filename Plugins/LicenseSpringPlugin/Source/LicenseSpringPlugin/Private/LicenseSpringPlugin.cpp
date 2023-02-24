@@ -9,6 +9,7 @@
 
 #define LOCTEXT_NAMESPACE "FLicenseSpringPluginModule"
 
+
 void FLicenseSpringPluginModule::StartupModule()
 {
 	// This code will execute after your module is loaded into memory; the exact timing is specified in the .uplugin file per-module
@@ -30,6 +31,8 @@ void FLicenseSpringPluginModule::StartupModule()
 
 	if (ExampleLibraryHandle)
 	{
+
+		UE_LOG(LogTemp, Log, TEXT("Library handle aquired"));
 		// Call the test function in the third party library that opens a message box
 //		ExampleLibraryFunction();
         LicenseSpring::Configuration::ptr_t pconf;
@@ -45,7 +48,28 @@ void FLicenseSpringPluginModule::StartupModule()
             FMessageDialog::Open(EAppMsgType::Ok, LOCTEXT("ThirdPartyLibraryError", "LicenseSpring::Configuration::Create failed"));
         }
         
-        LicenseSpring::LicenseManager licenseManager(pconf);
+        auto licenseManager = LicenseSpring::LicenseManager::create(pconf);
+
+		UE_LOG(LogTemp, Log, TEXT("Get license"));
+		try 
+		{
+			auto license = licenseManager->getCurrentLicense();
+			if (!license) {
+				auto key = licenseManager->getTrialLicense();
+				license = licenseManager->activateLicense(key);
+			}
+			license->localCheck();
+
+#pragma push_macro("check")
+#undef check
+            auto installFile = license->check(); // check license on the server
+#pragma pop_macro("check")
+		}
+		catch( const std::exception& exc )
+        {
+            UE_LOG(LogTemp, Error, TEXT("Licensing failed!"));
+        }
+
 	}
 	else
 	{

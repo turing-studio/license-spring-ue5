@@ -6,4 +6,4 @@
 #define EXAMPLELIBRARY_IMPORT
 #endif
 
-EXAMPLELIBRARY_IMPORT void ExampleLibraryFunction();
+//EXAMPLELIBRARY_IMPORT void ExampleLibraryFunction();

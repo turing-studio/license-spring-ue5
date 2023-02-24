@@ -4,7 +4,8 @@
 #include "Core.h"
 #include "Modules/ModuleManager.h"
 #include "Interfaces/IPluginManager.h"
-#include "LicenseSpringPluginLibrary/ExampleLibrary.h"
+//#include "LicenseSpringPluginLibrary/ExampleLibrary.h"
+#include "LicenseSpringPluginLibrary/LicenseManager.h"
 
 #define LOCTEXT_NAMESPACE "FLicenseSpringPluginModule"
 
@@ -30,7 +31,21 @@ void FLicenseSpringPluginModule::StartupModule()
 	if (ExampleLibraryHandle)
 	{
 		// Call the test function in the third party library that opens a message box
-		ExampleLibraryFunction();
+//		ExampleLibraryFunction();
+        LicenseSpring::Configuration::ptr_t pconf;
+        try
+        {
+            // Values are copied from sample project
+            pconf = LicenseSpring::Configuration::Create( "afce72fb-9fba-406e-8d19-ffde5b0a7cad",
+                "Qc8EdU7DY-gMI87-JMueZWXdtJ0Ek_hS6dGC_SwusO8", "DP", "Cpp Sample", "1.1" );
+        }
+        catch( const std::exception& exc )
+        {
+//            LogException( baseDir, exc );
+            FMessageDialog::Open(EAppMsgType::Ok, LOCTEXT("ThirdPartyLibraryError", "LicenseSpring::Configuration::Create failed"));
+        }
+        
+        LicenseSpring::LicenseManager licenseManager(pconf);
 	}
 	else
 	{

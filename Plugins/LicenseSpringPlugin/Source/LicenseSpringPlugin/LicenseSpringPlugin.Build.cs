@@ -1,5 +1,7 @@
 // Copyright Epic Games, Inc. All Rights Reserved.
 
+using System.Collections.Generic;
+using System.IO;
 using UnrealBuildTool;
 
 public class LicenseSpringPlugin : ModuleRules
@@ -10,23 +12,67 @@ public class LicenseSpringPlugin : ModuleRules
 		
 		PublicIncludePaths.AddRange(
 			new string[] {
-				// ... add public include paths required here ...
+				"LicenseSpringPlugin/Public",
 			}
-			);
-				
-		
+		);
+
 		PrivateIncludePaths.AddRange(
 			new string[] {
-				// ... add other private include paths required here ...
+				"LicenseSpringPlugin/Private",
+				"LicenseSpringPlugin/ThirdParty/LicenseSpringPluginLibrary"
 			}
-			);
-			
+		);
 		
+		string thirdPartyDir = Path.Combine(ModuleDirectory, "ThirdParty", "LicenseSpringPluginLibrary");
+
+		if (Target.Platform == UnrealTargetPlatform.Win64)
+		{
+			string platformDir = Path.Combine(thirdPartyDir, "x64", "Release");
+
+			// Add the import library
+			PublicAdditionalLibraries.Add(Path.Combine(thirdPartyDir, "LicenseSpring.lib"));
+
+			var libs = new List<string>() 
+			{
+				"LicenseSpring.dll",
+				"libcrypto-1_1-x64.dll",
+				"libcurl.dll",
+				"libssl-1_1-x64.dll",
+				"LSVMD.dll"
+			};
+
+			libs.ForEach(lib => PublicAdditionalLibraries.Add(Path.Combine(platformDir, lib)));
+			libs.ForEach(lib => PublicDelayLoadDLLs.Add(Path.Combine(platformDir, lib)));
+			libs.ForEach(lib => RuntimeDependencies.Add(Path.Combine(platformDir, lib)));
+
+			// Ensure that the DLL is staged along with the executable
+			// RuntimeDependencies.Add("$(PluginDir)/Binaries/ThirdParty/LicenseSpringPluginLibrary/Win64/ExampleLibrary.dll");
+		}
+		else if (Target.Platform == UnrealTargetPlatform.Mac)
+		{
+			string platformDir = Path.Combine(thirdPartyDir, "Mac", "Release");
+
+			var libs = new List<string>() 
+			{ 
+				"libcrypto.1.1.dylib", 
+				"libcrypto.dylib", 
+				"libcurl.4.dylib", 
+				"libcurl.dylib", 
+				"libLicenseSpring.dylib", 
+				"libssl.1.1.dylib", 
+				"libssl.dylib"
+			};
+
+			libs.ForEach(lib => PublicAdditionalLibraries.Add(Path.Combine(platformDir, lib)));
+			libs.ForEach(lib => PublicDelayLoadDLLs.Add(Path.Combine(platformDir, lib)));
+			libs.ForEach(lib => RuntimeDependencies.Add(Path.Combine(platformDir, lib)));
+		}
+
 		PublicDependencyModuleNames.AddRange(
 			new string[]
 			{
 				"Core",
-				"LicenseSpringPluginLibrary",
+				// "LicenseSpringPluginLibrary",
 				"Projects"
 				// ... add other public dependencies that you statically link with here ...
 			}
@@ -47,5 +93,7 @@ public class LicenseSpringPlugin : ModuleRules
 				// ... add any modules that your module loads dynamically here ...
 			}
 			);
+		
+		
 	}
 }

@@ -5,7 +5,7 @@
 #include "Modules/ModuleManager.h"
 #include "Interfaces/IPluginManager.h"
 //#include "LicenseSpringPluginLibrary/ExampleLibrary.h"
-#include "LicenseSpringPluginLibrary/LicenseManager.h"
+#include "LicenseManager.h"
 
 #define LOCTEXT_NAMESPACE "FLicenseSpringPluginModule"
 
@@ -20,9 +20,9 @@ void FLicenseSpringPluginModule::StartupModule()
 	// Add on the relative location of the third party dll and load it
 	FString LibraryPath;
 #if PLATFORM_WINDOWS
-	LibraryPath = FPaths::Combine(*BaseDir, TEXT("Binaries/ThirdParty/LicenseSpringPluginLibrary/Win64/ExampleLibrary.dll"));
+	LibraryPath = FPaths::Combine(*BaseDir, TEXT("Binaries/ThirdParty/LicenseSpringPluginLibrary/Win64/LicenseSpring.dll"));
 #elif PLATFORM_MAC
-    LibraryPath = FPaths::Combine(*BaseDir, TEXT("Source/ThirdParty/LicenseSpringPluginLibrary/Mac/Release/libExampleLibrary.dylib"));
+    LibraryPath = FPaths::Combine(*BaseDir, TEXT("Source/ThirdParty/LicenseSpringPluginLibrary/Mac/Release/libLicenseSpring.dylib"));
 #elif PLATFORM_LINUX
 	LibraryPath = FPaths::Combine(*BaseDir, TEXT("Binaries/ThirdParty/LicenseSpringPluginLibrary/Linux/x86_64-unknown-linux-gnu/libExampleLibrary.so"));
 #endif // PLATFORM_WINDOWS

@@ -40,8 +40,7 @@ public class LicenseSpringPlugin : ModuleRules
 				"libssl-1_1-x64.dll",
 				"LSVMD.dll"
 			};
-
-			libs.ForEach(lib => PublicAdditionalLibraries.Add(Path.Combine(platformDir, lib)));
+			
 			libs.ForEach(lib => PublicDelayLoadDLLs.Add(Path.Combine(platformDir, lib)));
 			libs.ForEach(lib => RuntimeDependencies.Add(Path.Combine(platformDir, lib)));
 		}

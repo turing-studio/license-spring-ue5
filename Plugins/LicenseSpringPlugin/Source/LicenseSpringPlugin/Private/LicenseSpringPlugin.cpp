@@ -19,9 +19,9 @@ void FLicenseSpringPluginModule::StartupModule()
 	// Add on the relative location of the third party dll and load it
 	FString LibraryPath;
 #if PLATFORM_WINDOWS
-	LibraryPath = FPaths::Combine(*BaseDir, TEXT("Source/ThirdParty/LicenseSpringPluginLibrary/x64/Release/LicenseSpring.dll"));
+	LibraryPath = FPaths::Combine(*BaseDir, TEXT("Source/LicenseSpringPlugin/ThirdParty/LicenseSpringPluginLibrary/x64/Release/LicenseSpring.dll"));
 #elif PLATFORM_MAC
-    LibraryPath = FPaths::Combine(*BaseDir, TEXT("Source/ThirdParty/LicenseSpringPluginLibrary/Mac/Release/libLicenseSpring.dylib"));
+    LibraryPath = FPaths::Combine(*BaseDir, TEXT("Source/LicenseSpringPlugin/ThirdParty/LicenseSpringPluginLibrary/Mac/Release/libLicenseSpring.dylib"));
 #endif // PLATFORM_WINDOWS
 
 	ExampleLibraryHandle = !LibraryPath.IsEmpty() ? FPlatformProcess::GetDllHandle(*LibraryPath) : nullptr;

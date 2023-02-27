@@ -30,7 +30,7 @@ public class LicenseSpringPlugin : ModuleRules
 			string platformDir = Path.Combine(thirdPartyDir, "x64", "Release");
 
 			// Add the import library
-			PublicAdditionalLibraries.Add(Path.Combine(thirdPartyDir, "LicenseSpring.lib"));
+			PublicAdditionalLibraries.Add(Path.Combine(platformDir, "LicenseSpring.lib"));
 
 			var libs = new List<string>() 
 			{

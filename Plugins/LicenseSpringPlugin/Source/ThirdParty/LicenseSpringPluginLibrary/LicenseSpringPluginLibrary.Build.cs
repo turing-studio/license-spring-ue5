@@ -41,6 +41,7 @@ public class LicenseSpringPluginLibrary : ModuleRules
 			};
 
 			libs.ForEach(lib => PublicDelayLoadDLLs.Add(Path.Combine(thirdPartyDir, lib)));
+			libs.ForEach(lib => RuntimeDependencies.Add(Path.Combine(thirdPartyDir, lib)));
 
 			// Ensure that the DLL is staged along with the executable
 			RuntimeDependencies.Add("$(PluginDir)/Binaries/ThirdParty/LicenseSpringPluginLibrary/Win64/ExampleLibrary.dll");

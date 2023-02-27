@@ -4,7 +4,6 @@
 #include "Core.h"
 #include "Modules/ModuleManager.h"
 #include "Interfaces/IPluginManager.h"
-//#include "LicenseSpringPluginLibrary/ExampleLibrary.h"
 #include "LicenseManager.h"
 
 #define LOCTEXT_NAMESPACE "FLicenseSpringPluginModule"
@@ -20,11 +19,9 @@ void FLicenseSpringPluginModule::StartupModule()
 	// Add on the relative location of the third party dll and load it
 	FString LibraryPath;
 #if PLATFORM_WINDOWS
-	LibraryPath = FPaths::Combine(*BaseDir, TEXT("Binaries/ThirdParty/LicenseSpringPluginLibrary/Win64/LicenseSpring.dll"));
+	LibraryPath = FPaths::Combine(*BaseDir, TEXT("Source/ThirdParty/LicenseSpringPluginLibraryx64/Release/LicenseSpring.dll"));
 #elif PLATFORM_MAC
     LibraryPath = FPaths::Combine(*BaseDir, TEXT("Source/ThirdParty/LicenseSpringPluginLibrary/Mac/Release/libLicenseSpring.dylib"));
-#elif PLATFORM_LINUX
-	LibraryPath = FPaths::Combine(*BaseDir, TEXT("Binaries/ThirdParty/LicenseSpringPluginLibrary/Linux/x86_64-unknown-linux-gnu/libExampleLibrary.so"));
 #endif // PLATFORM_WINDOWS
 
 	ExampleLibraryHandle = !LibraryPath.IsEmpty() ? FPlatformProcess::GetDllHandle(*LibraryPath) : nullptr;
@@ -34,7 +31,6 @@ void FLicenseSpringPluginModule::StartupModule()
 
 		UE_LOG(LogTemp, Log, TEXT("Library handle aquired"));
 		// Call the test function in the third party library that opens a message box
-//		ExampleLibraryFunction();
         LicenseSpring::Configuration::ptr_t pconf;
         try
         {
@@ -44,7 +40,7 @@ void FLicenseSpringPluginModule::StartupModule()
         }
         catch( const std::exception& exc )
         {
-//            LogException( baseDir, exc );
+			UE_LOG(LogTemp, Error, TEXT("%s"), exc.what());
             FMessageDialog::Open(EAppMsgType::Ok, LOCTEXT("ThirdPartyLibraryError", "LicenseSpring::Configuration::Create failed"));
         }
         
@@ -67,7 +63,7 @@ void FLicenseSpringPluginModule::StartupModule()
 		}
 		catch( const std::exception& exc )
         {
-            UE_LOG(LogTemp, Error, TEXT("Licensing failed!"));
+			UE_LOG(LogTemp, Error, TEXT("Licensing failed! %s"), exc.what());
         }
 
 	}

@@ -44,9 +44,6 @@ public class LicenseSpringPlugin : ModuleRules
 			libs.ForEach(lib => PublicAdditionalLibraries.Add(Path.Combine(platformDir, lib)));
 			libs.ForEach(lib => PublicDelayLoadDLLs.Add(Path.Combine(platformDir, lib)));
 			libs.ForEach(lib => RuntimeDependencies.Add(Path.Combine(platformDir, lib)));
-
-			// Ensure that the DLL is staged along with the executable
-			// RuntimeDependencies.Add("$(PluginDir)/Binaries/ThirdParty/LicenseSpringPluginLibrary/Win64/ExampleLibrary.dll");
 		}
 		else if (Target.Platform == UnrealTargetPlatform.Mac)
 		{

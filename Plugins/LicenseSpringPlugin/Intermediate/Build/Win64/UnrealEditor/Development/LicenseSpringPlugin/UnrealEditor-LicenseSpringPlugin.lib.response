@@ -1,0 +1,12 @@
+/NOLOGO
+/errorReport:prompt
+/MACHINE:x64
+/SUBSYSTEM:WINDOWS
+/DEF
+/NAME:"UnrealEditor-LicenseSpringPlugin.dll"
+/IGNORE:4221
+/NODEFAULTLIB
+"C:\UnrealProjects\license-spring-ue5\Intermediate\Build\Win64\LicenseSpringEditor\Development\Core\SharedPCH.Core.ShadowErrors.h.obj"
+"C:\UnrealProjects\license-spring-ue5\Plugins\LicenseSpringPlugin\Intermediate\Build\Win64\UnrealEditor\Development\LicenseSpringPlugin\LicenseSpringPlugin.cpp.obj"
+"C:\UnrealProjects\license-spring-ue5\Plugins\LicenseSpringPlugin\Intermediate\Build\Win64\UnrealEditor\Development\LicenseSpringPlugin\Default.rc2.res"
+/OUT:"C:\UnrealProjects\license-spring-ue5\Plugins\LicenseSpringPlugin\Intermediate\Build\Win64\UnrealEditor\Development\LicenseSpringPlugin\UnrealEditor-LicenseSpringPlugin.lib"

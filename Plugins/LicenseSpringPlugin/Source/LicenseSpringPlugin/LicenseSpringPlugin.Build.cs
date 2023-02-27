@@ -43,8 +43,8 @@ public class LicenseSpringPlugin : ModuleRules
 			};
 			
 			libs.ForEach(lib => PublicDelayLoadDLLs.Add(Path.Combine(platformDir, lib)));
-
-			File.Copy(Path.Combine(platformDir, "LicenseSpring.dll"), Path.Combine(binariesDir, "LicenseSpring.dll"), true);
+			libs.ForEach(lib => RuntimeDependencies.Add(Path.Combine(platformDir, lib)));
+			libs.ForEach(lib => File.Copy(Path.Combine(platformDir, lib), Path.Combine(binariesDir, lib), true));
 		}
 		else if (Target.Platform == UnrealTargetPlatform.Mac)
 		{

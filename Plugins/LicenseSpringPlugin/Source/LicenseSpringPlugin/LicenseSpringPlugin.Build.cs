@@ -28,6 +28,7 @@ public class LicenseSpringPlugin : ModuleRules
 		if (Target.Platform == UnrealTargetPlatform.Win64)
 		{
 			string platformDir = Path.Combine(thirdPartyDir, "x64", "Release");
+			string binariesDir = Path.Combine(ModuleDirectory, "../../Binaries/Win64/");
 
 			// Add the import library
 			PublicAdditionalLibraries.Add(Path.Combine(platformDir, "LicenseSpring.lib"));
@@ -42,7 +43,8 @@ public class LicenseSpringPlugin : ModuleRules
 			};
 			
 			libs.ForEach(lib => PublicDelayLoadDLLs.Add(Path.Combine(platformDir, lib)));
-			libs.ForEach(lib => RuntimeDependencies.Add(Path.Combine(platformDir, lib)));
+
+			File.Copy(Path.Combine(platformDir, "LicenseSpring.dll"), Path.Combine(binariesDir, "LicenseSpring.dll"), true);
 		}
 		else if (Target.Platform == UnrealTargetPlatform.Mac)
 		{

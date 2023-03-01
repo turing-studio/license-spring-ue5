@@ -9,12 +9,6 @@ public class LicenseSpringPlugin : ModuleRules
 	public LicenseSpringPlugin(ReadOnlyTargetRules Target) : base(Target)
 	{
 		PCHUsage = ModuleRules.PCHUsageMode.UseExplicitOrSharedPCHs;
-		
-		PublicIncludePaths.AddRange(
-			new string[] {
-				"LicenseSpringPlugin/Public",
-			}
-		);
 
 		PrivateIncludePaths.AddRange(
 			new string[] {
@@ -70,11 +64,10 @@ public class LicenseSpringPlugin : ModuleRules
 			new string[]
 			{
 				"Core",
-				// "LicenseSpringPluginLibrary",
 				"Projects"
 				// ... add other public dependencies that you statically link with here ...
 			}
-			);
+		);
 			
 		
 		PrivateDependencyModuleNames.AddRange(
@@ -82,7 +75,7 @@ public class LicenseSpringPlugin : ModuleRules
 			{
 				// ... add private dependencies that you statically link with here ...	
 			}
-			);
+		);
 		
 		
 		DynamicallyLoadedModuleNames.AddRange(
@@ -90,8 +83,6 @@ public class LicenseSpringPlugin : ModuleRules
 			{
 				// ... add any modules that your module loads dynamically here ...
 			}
-			);
-		
-		
+		);
 	}
 }

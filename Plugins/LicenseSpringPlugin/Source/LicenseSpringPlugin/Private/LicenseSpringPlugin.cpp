@@ -1,15 +1,52 @@
 // Copyright Epic Games, Inc. All Rights Reserved.
 
 #include "LicenseSpringPlugin.h"
+#include "Configuration.h"
 #include "Core.h"
+#include "EncryptString.h"
 #include "Modules/ModuleManager.h"
 #include "Interfaces/IPluginManager.h"
 #include "LicenseManager.h"
 
 #define LOCTEXT_NAMESPACE "FLicenseSpringPluginModule"
 
+class FConfiguration : public IConfiguration
+{
+	LicenseSpring::Configuration::ptr_t Configuration;
 
-void FLicenseSpringPluginModule::StartupModule()
+public:
+	FConfiguration(LicenseSpring::Configuration::ptr_t conf) : Configuration(conf) { }
+
+	virtual FString GetAppName() const override { return Configuration->getAppName().c_str(); }
+	virtual FString GetAppVersion() const override { return Configuration->getAppVersion().c_str(); }
+	virtual FString GetSdkVersion() const override { return Configuration->getSdkVersion().c_str(); }
+	virtual uint32_t GetLicenseSpringAPIVersion() const override { return Configuration->getLicenseSpringAPIVersion(); }
+	virtual FString GetOsVersion() const override { return Configuration->getOsVersion().c_str(); }
+
+	static TSharedPtr<IConfiguration> Create( const std::string& apiKey,
+		const std::string& sharedKey,
+		const std::string& productCode,
+		const std::string& appName,
+		const std::string& appVersion)
+	{
+		LicenseSpring::ExtendedOptions options;
+		options.collectNetworkInfo( true );
+		options.enableSSLCheck( true );
+		
+		return MakeShared<FConfiguration>(LicenseSpring::Configuration::Create(apiKey, sharedKey, productCode, appName, appVersion, options));
+	}
+};
+
+TSharedPtr<IConfiguration> FAppConfig::CreateLicenseSpringConfig() const
+{
+	return FConfiguration::Create(
+		EncryptStr( "afce72fb-9fba-406e-8d19-ffde5b0a7cad" ), // your LicenseSpring API key (UUID)
+		EncryptStr( "Qc8EdU7DY-gMI87-JMueZWXdtJ0Ek_hS6dGC_SwusO8" ), // your LicenseSpring Shared key
+		EncryptStr( "DP" ), // product code that you specified in LicenseSpring for your application
+	TCHAR_TO_UTF8(*AppName), TCHAR_TO_UTF8(*AppVersion) );
+}
+
+void FLicenseSpring::StartupModule()
 {
 	// This code will execute after your module is loaded into memory; the exact timing is specified in the .uplugin file per-module
 
@@ -73,7 +110,7 @@ void FLicenseSpringPluginModule::StartupModule()
 	}
 }
 
-void FLicenseSpringPluginModule::ShutdownModule()
+void FLicenseSpring::ShutdownModule()
 {
 	// This function may be called during shutdown to clean up your module.  For modules that support dynamic reloading,
 	// we call this function before unloading the module.
@@ -85,4 +122,4 @@ void FLicenseSpringPluginModule::ShutdownModule()
 
 #undef LOCTEXT_NAMESPACE
 	
-IMPLEMENT_MODULE(FLicenseSpringPluginModule, LicenseSpringPlugin)
+IMPLEMENT_MODULE(FLicenseSpring, LicenseSpringPlugin)

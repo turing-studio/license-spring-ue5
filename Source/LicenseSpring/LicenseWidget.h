@@ -22,4 +22,7 @@ protected:
 
 	UPROPERTY(meta=(BindWidget))
 		class UButton* LicenseButton;
+
+	UPROPERTY(meta = (BindWidget))
+	class UMultiLineEditableText* LicenceInputText;
 };

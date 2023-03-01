@@ -4,6 +4,8 @@
 #include "LicenseWidget.h"
 
 #include "Components/Button.h"
+#include "Components/EditableText.h"
+#include "Components/MultiLineEditableText.h"
 #include "Components/TextBlock.h"
 
 
@@ -13,4 +15,5 @@ void ULicenseWidget::NativeConstruct()
 
 	LicenseButton->SetDisplayLabel("License test");
 	InfoText->SetText(FText::FromString(TEXT("Test text license.")));
+	LicenceInputText->SetText(FText::FromString(TEXT("Jako velki test")));
 }

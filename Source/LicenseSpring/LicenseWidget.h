@@ -3,6 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "LicenseSpringPlugin.h"
 #include "Blueprint/UserWidget.h"
 #include "LicenseWidget.generated.h"
 
@@ -14,15 +15,30 @@ class LICENSESPRING_API ULicenseWidget : public UUserWidget
 {
 	GENERATED_BODY()
 
+	TSharedPtr<ILicenseManager> LicenseManager;
+	
 protected:
 	virtual void NativeConstruct() override;
 	
 	UPROPERTY(meta=(BindWidget))
-		class UTextBlock* InfoText;
+	class UTextBlock* InfoText;
 
 	UPROPERTY(meta=(BindWidget))
-		class UButton* LicenseButton;
+	class UEditableText* ApiKeyText;
+
+	UPROPERTY(meta=(BindWidget))
+	class UEditableText* SharedKeyText;
+
+	UPROPERTY(meta=(BindWidget))
+	class UEditableText* ProductCodeText;
 
 	UPROPERTY(meta = (BindWidget))
-	class UMultiLineEditableText* LicenceInputText;
+	class UEditableText* LicenseKeyText;
+
+	UPROPERTY(meta=(BindWidget))
+	class UButton* LicenseButton;
+
+public:
+	UFUNCTION()
+	void OnLicenseButtonClicked();
 };

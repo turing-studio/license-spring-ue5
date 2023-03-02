@@ -23,6 +23,7 @@ public class LicenseSpringPlugin : ModuleRules
 		{
 			string platformDir = Path.Combine(thirdPartyDir, "x64", "Release");
 			string binariesDir = Path.Combine(ModuleDirectory, "../../Binaries/Win64/");
+			Directory.CreateDirectory(binariesDir);
 
 			// Add the import library
 			PublicAdditionalLibraries.Add(Path.Combine(platformDir, "LicenseSpring.lib"));

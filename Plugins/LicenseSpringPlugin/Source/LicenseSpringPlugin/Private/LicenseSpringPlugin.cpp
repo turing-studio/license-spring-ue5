@@ -241,6 +241,10 @@ void FLicenseSpring::StartupModule()
             auto installFile = license->check(); // check license on the server
 #pragma pop_macro("check")
 		}
+		catch( LicenseSpring::LicenseSpringException exc )
+		{
+			UE_LOG(LogTemp, Error, TEXT("LicenseSpring exception %s"), exc.what());
+		}
 		catch( const std::exception& exc )
         {
 			UE_LOG(LogTemp, Error, TEXT("Licensing failed! %s"), exc.what());
